@@ -1,0 +1,21 @@
+# ---- OS files (safe to ignore) ----
+.DS_Store
+Thumbs.db
+
+# ---- Java build artifacts ----
+# Compiled class files and common output folders
+*.class
+/bin/
+/out/
+
+# ---- IDE/editor files ----
+# Ignore VS Code workspace settings, but keep recommended settings files
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ---- Logs & temp files ----
+*.log
+*.tmp
+*.swp
+*~
