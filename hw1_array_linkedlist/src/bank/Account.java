@@ -5,17 +5,17 @@ public class Account {
     public String name;
     public String address;
     public String ssn;
-    public double balance;
+    public double initialDeposit;
 
-    public Account(int id, String name, String address, String ssn, double balance){
+    public Account(int id, String name, String address, String ssn, double initialDeposit){
         this.id = id;
         this.name = name;
         this.address = address;
         this.ssn = ssn;
-        this.balance = balance;
+        this.initialDeposit = initialDeposit;
     }
 
     public String toString(){
-        return "Account{id= " + id + ", name= " + name + ", address= " + address + ", ssn= " + ssn + ", balance= " + balance + "}";
+        return "Account{id= " + id + ", name= " + name + ", address= " + address + ", ssn= " + ssn + ", initialDeposit= " + initialDeposit + "}";
     }
 }

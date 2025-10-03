@@ -9,6 +9,8 @@ public class Node {
         this.next = null;
     }
 
+    // overriding the toString() method
+    // print the data of the Node object instead of a memory address
     @Override
     public String toString(){
         return String.valueOf(data);
