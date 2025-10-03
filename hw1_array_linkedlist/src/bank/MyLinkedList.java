@@ -51,6 +51,16 @@ public class MyLinkedList {
         return false;    
     }
 
+    public Account findById(int id){
+        Node cur = head;
+        while(cur != null){
+            if(cur.data.id == id) return cur.data;
+            if(cur.data.id > id) return null;
+            cur = cur.next;
+        }
+        return null;
+    }
+
     // print all accounts in the linked list
     public void printList(){
         Node cur = head;

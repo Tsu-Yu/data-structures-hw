@@ -15,8 +15,7 @@ public class Bank {
         Account newAccount = new Account(id, name, address, ssn, initialDeposit);
         users.addSorted(newAccount);
 
-        return id;
-        
+        return id;  
     }
 
     public boolean deleteUser(int id){
@@ -32,8 +31,19 @@ public class Bank {
         }
     }
 
-    public void printUsers(){
-        users.printList();
+    public boolean payUserToUser(int payerId, int payeeId, double amount) {
+        Account payer = users.findById(payerId);
+        Account payee = users.findById(payeeId);
+
+        if (payer == null || payee == null){
+            return false;
+        }
+        if(payer.initialDeposit < amount || amount < 0){
+            return false;
+        } 
+        payer.initialDeposit -= amount;
+        payee.initialDeposit += amount;
+        return true;
     }
 
     private static void validateNewUser(String name, String address, String ssn, double initialDeposit){
@@ -47,6 +57,10 @@ public class Bank {
         if(!errors.isEmpty()){
             throw new IllegalArgumentException(errors.toString().trim());
         }
+    }
+
+    public void printUsers(){
+        users.printList();
     }
 
     
