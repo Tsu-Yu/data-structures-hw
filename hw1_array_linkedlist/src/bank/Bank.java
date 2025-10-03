@@ -83,8 +83,69 @@ public class Bank {
         boolean removed = users.removeById(dropId);
         if(!removed) return false;    
         freedIds.offer(dropId);
-        
+
         return true;
+    }
+
+    // task 7: TODO
+    public static Bank mergedBank(Bank b1, Bank b2){
+        if(b1 == null || b2 == null) throw new IllegalArgumentException("Bank must be non-null!!");
+        
+        Bank nb = new Bank();
+        
+        int maxId1 = 0;
+        int maxId2 = 0;
+
+        for(Node cur = b1.users.head; cur != null; cur = cur.next){
+            if(cur.data.id > maxId1) maxId1 = cur.data.id;
+        }
+        for(Node cur = b2.users.head; cur != null; cur = cur.next){
+            if(cur.data.id > maxId2) maxId2 = cur.data.id;
+        }
+
+        int maxId = Math.max(maxId1, maxId2);
+        nb.nextId = (maxId <= 0)? 1 : maxId + 1;
+
+        Node n1 = b1.users.head;
+        Node n2 = b2.users.head;
+
+        while (n1 != null && n2 != null){
+            int id1 = n1.data.id;
+            int id2 = n2.data.id;
+
+            if(id1 < id2){
+                Account a = n1.data;
+                nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit));
+                n1 = n1.next;
+            } else if(id1 > id2){
+                Account a = n2.data;
+                nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit));
+                n2 = n2.next;
+            } else {
+                Account a1 = n1.data;
+                nb.users.addSorted(new Account(a1.id, a1.name, a1.address, a1.ssn, a1.initialDeposit));
+
+                Account a2 = n2.data;
+                int newId = nb.nextId++;
+                nb.users.addSorted(new Account(newId, a2.name, a2.address, a2.ssn, a2.initialDeposit)); 
+            
+                n1 = n1.next;
+                n2 = n2.next;
+            }
+        }
+
+        while (n1 != null){
+            Account a = n1.data;
+            nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit)); 
+            n1 = n1.next;
+        }
+        while (n2 != null){
+            Account a = n2.data;
+            nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit)); 
+            n2 = n2.next;
+        }
+
+        return nb;
     }
 
     // for task 2
