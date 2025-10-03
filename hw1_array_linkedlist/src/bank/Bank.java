@@ -19,6 +19,23 @@ public class Bank {
         
     }
 
+    public boolean deleteUser(int id){
+        if(id < 0) return false;
+
+        boolean removed = users.removerById(id);
+
+        if(removed){
+            freedIds.offer(id);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public void printUsers(){
+        users.printList();
+    }
+
     private static void validateNewUser(String name, String address, String ssn, double initialDeposit){
         StringBuilder errors = new StringBuilder();
 

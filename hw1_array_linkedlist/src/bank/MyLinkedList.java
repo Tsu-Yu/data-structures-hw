@@ -25,6 +25,32 @@ public class MyLinkedList {
         cur.next = newNode;
     }
 
+    public boolean removerById(int id){
+        if(head == null) return false;
+
+        if (head.data.id == id){
+            head = head.next;
+            return true;
+        }
+
+        Node prev = head;
+        Node cur = head.next;
+        while(cur != null){
+            if(cur.data.id == id){
+                prev.next = cur.next;
+                return true;
+            }
+
+            if(cur.data.id > id){
+                return false;
+            }
+
+            prev = cur;
+            cur = cur.next;
+        }
+        return false;    
+    }
+
     // print all accounts in the linked list
     public void printList(){
         Node cur = head;
