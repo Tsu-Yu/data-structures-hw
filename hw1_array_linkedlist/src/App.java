@@ -1,21 +1,13 @@
+import java.util.NoSuchElementException;
+
 import bank.Bank;
 
 public class App {
     public static void main(String[] args) {
-        Bank uci = new Bank();
-        int a = uci.addUser("Carrie1", "4201 PV", "12345678", 100);
-        int b = uci.addUser("Carrie2", "4201 PV", "12345678", 0);
-        int c = uci.addUser("Carrie3", "4201 PV", "12345678", 50);
-        int d = uci.addUser("Carrie4", "4201 PV", "12345678", 50);
-
-        uci.payUserToUser(a, d, 100);
-        uci.deleteUser(b);
-        uci.deleteUser(c);
-
-
-        uci.printUsers();
-
-        float median = uci.getMedianId();
-        System.out.println(median);
+        Bank bank = new Bank();
+        int a = bank.addUser("Amy","Addr","111",120.5);
+        int b = bank.addUser("Amy","Addr","111", 79.5);
+        bank.mergeAccounts(a, b);
+        bank.printUsers();
     }
 }

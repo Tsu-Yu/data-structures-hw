@@ -27,7 +27,7 @@ public class MyLinkedList {
         cur.next = newNode;
     }
 
-    public boolean removerById(int id){
+    public boolean removeById(int id){
         if(head == null) return false;
 
         if (head.data.id == id){
