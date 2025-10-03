@@ -46,6 +46,10 @@ public class Bank {
         return true;
     }
 
+    public float getMedianId(){
+        return users.getMedianId();
+    }
+
     private static void validateNewUser(String name, String address, String ssn, double initialDeposit){
         StringBuilder errors = new StringBuilder();
 

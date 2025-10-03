@@ -6,9 +6,16 @@ public class App {
         int a = uci.addUser("Carrie1", "4201 PV", "12345678", 100);
         int b = uci.addUser("Carrie2", "4201 PV", "12345678", 0);
         int c = uci.addUser("Carrie3", "4201 PV", "12345678", 50);
+        int d = uci.addUser("Carrie4", "4201 PV", "12345678", 50);
 
-        uci.payUserToUser(a, b, 100);
+        uci.payUserToUser(a, d, 100);
+        uci.deleteUser(b);
+        uci.deleteUser(c);
+
 
         uci.printUsers();
+
+        float median = uci.getMedianId();
+        System.out.println(median);
     }
 }

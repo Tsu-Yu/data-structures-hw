@@ -1,5 +1,7 @@
 package bank;
 
+import java.util.NoSuchElementException;
+
 public class MyLinkedList {
     Node head;
 
@@ -59,6 +61,26 @@ public class MyLinkedList {
             cur = cur.next;
         }
         return null;
+    }
+
+    public float getMedianId(){
+        if(head == null){
+            throw new NoSuchElementException("empty list");
+        }
+
+        Node slow = head;
+        Node fast = head;
+
+        while (fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast =fast.next.next;
+        }
+
+        if(fast.next == null){
+            return (float)slow.data.id;
+        }else {
+            return (slow.data.id + slow.next.data.id) / 2.0f;
+        }
     }
 
     // print all accounts in the linked list
