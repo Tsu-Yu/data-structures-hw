@@ -1,5 +1,6 @@
 package bank;
 
+import java.util.BitSet;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
@@ -15,7 +16,7 @@ public class Bank {
         final int id = !freedIds.isEmpty()? freedIds.poll() : nextId++;
 
         Account newAccount = new Account(id, name, address, ssn, initialDeposit);
-        users.addSorted(newAccount);
+        users.addUser(newAccount);
 
         return id;  
     }
@@ -89,22 +90,30 @@ public class Bank {
 
     // task 7: TODO
     public static Bank mergedBank(Bank b1, Bank b2){
-        if(b1 == null || b2 == null) throw new IllegalArgumentException("Bank must be non-null!!");
+        if(b1 == null && b2 == null) throw new IllegalArgumentException("One of Bank must be non-null!!");
         
         Bank nb = new Bank();
         
         int maxId1 = 0;
         int maxId2 = 0;
+        java.util.BitSet used = new java.util.BitSet();
 
         for(Node cur = b1.users.head; cur != null; cur = cur.next){
             if(cur.data.id > maxId1) maxId1 = cur.data.id;
+            used.set(cur.data.id);
         }
         for(Node cur = b2.users.head; cur != null; cur = cur.next){
             if(cur.data.id > maxId2) maxId2 = cur.data.id;
+            used.set(cur.data.id);
         }
 
         int maxId = Math.max(maxId1, maxId2);
         nb.nextId = (maxId <= 0)? 1 : maxId + 1;
+
+        java.util.PriorityQueue<Integer> freePool = new java.util.PriorityQueue<>();
+        for (int i = 1; i <= maxId; i++) {
+            if (!used.get(i)) freePool.offer(i);
+        }
 
         Node n1 = b1.users.head;
         Node n2 = b2.users.head;
@@ -115,19 +124,25 @@ public class Bank {
 
             if(id1 < id2){
                 Account a = n1.data;
-                nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit));
+                nb.users.addUser(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit));
                 n1 = n1.next;
             } else if(id1 > id2){
                 Account a = n2.data;
-                nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit));
+                nb.users.addUser(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit));
                 n2 = n2.next;
             } else {
                 Account a1 = n1.data;
-                nb.users.addSorted(new Account(a1.id, a1.name, a1.address, a1.ssn, a1.initialDeposit));
+                nb.users.addUser(new Account(a1.id, a1.name, a1.address, a1.ssn, a1.initialDeposit));
 
                 Account a2 = n2.data;
-                int newId = nb.nextId++;
-                nb.users.addSorted(new Account(newId, a2.name, a2.address, a2.ssn, a2.initialDeposit)); 
+
+                int newId;
+                if(!freePool.isEmpty()){
+                    newId = freePool.poll();
+                }else {
+                    newId = nb.nextId++;
+                }
+                nb.users.addUser(new Account(newId, a2.name, a2.address, a2.ssn, a2.initialDeposit)); 
             
                 n1 = n1.next;
                 n2 = n2.next;
@@ -136,12 +151,12 @@ public class Bank {
 
         while (n1 != null){
             Account a = n1.data;
-            nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit)); 
+            nb.users.addUser(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit)); 
             n1 = n1.next;
         }
         while (n2 != null){
             Account a = n2.data;
-            nb.users.addSorted(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit)); 
+            nb.users.addUser(new Account(a.id, a.name, a.address, a.ssn, a.initialDeposit)); 
             n2 = n2.next;
         }
 
@@ -164,6 +179,10 @@ public class Bank {
 
     public void printUsers(){
         users.printList();
+    }
+
+    public Account findUser(int id){
+        return users.findById(id);
     }
 
     

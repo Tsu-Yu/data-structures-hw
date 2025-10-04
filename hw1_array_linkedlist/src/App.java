@@ -1,6 +1,4 @@
-import java.util.NoSuchElementException;
-
-import bank.Bank;
+import main.java.bank.Bank;
 
 public class App {
     public static void main(String[] args) {
@@ -9,6 +7,8 @@ public class App {
         int oc1 = oc.addUser("A","X","111",10); // 1
         int oc2 = oc.addUser("B","Y","222",10); // 2
         int oc3 = oc.addUser("C","Z","333",10); // 3
+        int oc4 = oc.addUser("D","H","444",10); // 4
+
 
         // Bank of Los Angeles
         Bank la = new Bank();
@@ -18,7 +18,10 @@ public class App {
         int la4 = la.addUser("L4","LW","777",5); // 4
 
         // 為了「沒有重複」，我們先把 OC 的 3 刪掉，留下 1,2；LA 留 3,4
-        oc.deleteUser(oc3); // 釋放 3，但不在清單內了：OC 清單只有 1,2
+        oc.deleteUser(oc2); // 釋放 3，但不在清單內了：OC 清單只有 1,2
+        oc.deleteUser(la1);
+        oc.deleteUser(la2);
+        oc.deleteUser(la3);
 
         Bank sc = Bank.mergedBank(oc, la);
         sc.printUsers();

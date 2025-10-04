@@ -6,7 +6,7 @@ public class MyLinkedList {
     Node head;
 
     // add new account in sorted order by id
-    public void addSorted(Account acc){
+    public void addUser(Account acc){
         
         // if the list is empty or the new id is smaller than the head id
         // insert at the beginning
