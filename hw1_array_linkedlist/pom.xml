@@ -22,7 +22,6 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- 讓 mvn test 使用 JUnit 5 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
