@@ -1,4 +1,4 @@
-package test.java.ds;
+package ds;
 
 public class QueueTest {
     
