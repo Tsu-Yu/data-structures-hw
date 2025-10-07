@@ -3,7 +3,7 @@ package ds;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class ExprEvaluatorTest {
+class ExprEvaluatorTest {
 
     private final ExprEvaluator ev = new ExprEvaluator();
 

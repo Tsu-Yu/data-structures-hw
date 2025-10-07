@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
 
-public class StackTest {
+class StackTest {
 
     @Test
     public void testPushAndPopOrder() {

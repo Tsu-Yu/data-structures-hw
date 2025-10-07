@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QueueTest {
+class QueueTest {
 
     @Test
     void enqueueDequeue_FifoOrder() {
