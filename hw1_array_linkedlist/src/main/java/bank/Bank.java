@@ -1,6 +1,5 @@
 package bank;
 
-import java.util.BitSet;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
