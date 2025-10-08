@@ -87,7 +87,6 @@ public class Bank {
         return true;
     }
 
-    // task 7: TODO
     public static Bank mergedBank(Bank b1, Bank b2){
         if(b1 == null && b2 == null) throw new IllegalArgumentException("One of Bank must be non-null!!");
         
