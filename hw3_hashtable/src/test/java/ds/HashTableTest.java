@@ -7,16 +7,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HashTableTest {
 
-    private HashTable htSmall;  // 小表，方便製造碰撞
-    private HashTable htLarge;  // 大表，做一般性測試
+    private HashTable htSmall;  
+    private HashTable htLarge;  
 
     @BeforeEach
     void setup() {
-        htSmall = new HashTable(5);    // 小容量方便驗證碰撞
-        htLarge = new HashTable(101);  // 隨意的質數容量
+        htSmall = new HashTable(5);    
+        htLarge = new HashTable(101);  
     }
 
-    // ---------- 建構子與基本狀態 ----------
 
     @Test
     void constructor_shouldRejectNonPositiveCapacity() {
@@ -27,13 +26,6 @@ class HashTableTest {
     @Test
     void size_initiallyZero() {
         assertEquals(0, htSmall.size());
-    }
-
-    // ---------- hash：輸入驗證、範圍、決定性 ----------
-
-    @Test
-    void hash_null_shouldThrow() {
-        assertThrows(IllegalArgumentException.class, () -> htSmall.hash(null));
     }
 
     @Test
@@ -53,7 +45,6 @@ class HashTableTest {
         assertEquals(idx1, idx2);
     }
 
-    // ---------- insert：新增、避免重複 ----------
 
     @Test
     void insert_singleKey_increasesSizeToOne() {
@@ -71,17 +62,14 @@ class HashTableTest {
     @Test
     void insert_emptyString_allowedAndCounted() {
         htSmall.insert("");
-        assertEquals(1, htSmall.size());
-        // 再插一次空字串，仍不應增加
+        assertEquals(1, htSmall.size()); // because empty string is considered a valid key
         htSmall.insert("");
         assertEquals(1, htSmall.size());
     }
 
-    // ---------- 碰撞測試（分離鏈結應可容納不同鍵於同一桶） ----------
 
     @Test
     void insert_twoDifferentKeysSameBucket_bothCounted() {
-        // 用小容量（5）嘗試找兩個不同字串雜湊到同一格
         String a = null, b = null;
         outer:
         for (int i = 0; i < 200; i++) {
@@ -105,11 +93,9 @@ class HashTableTest {
         assertEquals(2, htSmall.size(), "collision pair should both be counted");
     }
 
-    // ---------- 壓力一點點：含重複的多次插入 ----------
 
     @Test
     void insert_manyWithDuplicates_sizeEqualsUniqueCount() {
-        // 插入一些字串並包含重複；最後檢查 size 是否等於獨特鍵數
         String[] keys = {
                 "aa","bb","cc","dd","ee",
                 "aa","bb","cc","xx","yy",

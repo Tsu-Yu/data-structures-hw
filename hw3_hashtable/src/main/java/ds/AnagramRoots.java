@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class AnagramRoots {
+    public AnagramRoots() {
+        // no instance
+    }
     public static int countUniqueRoots(File file, int tableCapacity) throws IOException {
         if (file == null) throw new IllegalArgumentException("file is null");
         if (!file.exists()) throw new IllegalArgumentException("file not found: " + file.getPath());
@@ -31,4 +34,19 @@ public class AnagramRoots {
         }
         return ht.size();
     }
+
+    public static void main(String[] args) throws Exception {
+    String defaultPath = "src/main/java/ds/pride-and-prejudice.txt";
+    int defaultCap = 50021;
+
+    File f = new File(defaultPath);
+    if (!f.exists()) {
+        System.err.println("File not found: " + f.getAbsolutePath());
+        System.err.println("Tip: put the file at " + defaultPath + " or pass a custom path.");
+        System.exit(1);
+    }
+
+    int unique = countUniqueRoots(f,defaultCap);
+    System.out.println("Unique anagram roots = " + unique);
+}
 }

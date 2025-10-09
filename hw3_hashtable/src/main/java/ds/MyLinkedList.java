@@ -10,17 +10,18 @@ public class MyLinkedList {
     }
 
     public boolean contains(String x){
-        if(x == null) throw new IllegalArgumentException("Input cannot be null");
+        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
         Node cur = head;
         while(cur != null){
-            if(cur.value.equals(cur)) return true;
+            if(x.equals(cur.value)) return true;
             cur = cur.next;
         }
         return false;
     }
 
     public boolean addIfAbsent(String x){
-        if(x == null) throw new IllegalArgumentException("Input cannot be null");
+        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
+        // If already present, do not add
         if(contains(x)) return false;
 
         // Insert at the beginning, because bucket just needs to store values

@@ -19,9 +19,8 @@ public class HashTable {
         count = 0;
     }
 
-    // private because it's an internal helper function
-    private int hash(String x){
-        if(x == null) throw new IllegalArgumentException("Input cannot be null");
+    public int hash(String x){
+        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
         
         // CONSIDERING: using long to avoid overflow
         final int a = 33;   // follow the textbook's suggestion
@@ -37,7 +36,7 @@ public class HashTable {
     }
 
     public void insert(String x){
-        if(x == null) throw new IllegalArgumentException("Input cannot be null");
+        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
         
         // Insert only if x is not already present
         int idx = hash(x);

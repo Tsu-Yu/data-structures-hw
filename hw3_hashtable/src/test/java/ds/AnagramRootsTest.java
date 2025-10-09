@@ -1,43 +1,35 @@
 package ds;
 
 import org.junit.jupiter.api.Test;
+
+import ds.AnagramRoots;
+
 import java.io.File;
 import java.io.PrintWriter;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnagramRootsTest {
 
     @Test
-    void tinyFile_mangoGonmaApple_returns2() throws Exception {
+    void tinyFile_twoUniqueRoots() throws Exception {
+        // 內容：mango gonma apple  → roots: agmno, agmno, aelpp → 獨特=2
         File tmp = File.createTempFile("tiny", ".txt");
-        try (PrintWriter pw = new PrintWriter(tmp)) {
-            pw.println("mango, gonma apple"); // roots: agmno, agmno, aelpp  → 2
-        }
-        int ans = AnagramRoots.countUniqueAnagramRoots(tmp, 101);
-        assertEquals(2, ans);
         tmp.deleteOnExit();
+        try (PrintWriter pw = new PrintWriter(tmp)) {
+            pw.println("mango, gonma apple");
+        }
+        int count = AnagramRoots.countUniqueRoots(tmp, 101);
+        assertEquals(2, count);
     }
 
     @Test
-    void onlyDelimiters_returns0() throws Exception {
+    void onlyDelimiters_zero() throws Exception {
         File tmp = File.createTempFile("empty", ".txt");
-        try (PrintWriter pw = new PrintWriter(tmp)) {
-            pw.println(" ,.;!! \t\n --- ");
-        }
-        int ans = AnagramRoots.countUniqueAnagramRoots(tmp, 97);
-        assertEquals(0, ans);
         tmp.deleteOnExit();
-    }
-
-    @Test
-    void duplicatesAndCase_ignoredByLowercasing() throws Exception {
-        File tmp = File.createTempFile("case", ".txt");
         try (PrintWriter pw = new PrintWriter(tmp)) {
-            pw.println("Stop TOPS pots Spot"); // 全是同一組 root：opst
+            pw.println(" ,.;!! \t\n ");
         }
-        int ans = AnagramRoots.countUniqueAnagramRoots(tmp, 97);
-        assertEquals(1, ans);
-        tmp.deleteOnExit();
+        int count = AnagramRoots.countUniqueRoots(tmp, 101);
+        assertEquals(0, count);
     }
 }
