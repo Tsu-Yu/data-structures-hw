@@ -20,7 +20,6 @@ public class HashTable {
     }
 
     public int hash(String x){        
-        // CONSIDERING: using long to avoid overflow
         final int a = 33;   // follow the textbook's suggestion
         long h = 0;
 
