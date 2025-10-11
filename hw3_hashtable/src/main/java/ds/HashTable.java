@@ -19,25 +19,21 @@ public class HashTable {
         count = 0;
     }
 
-    public int hash(String x){
-        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
-        
+    public int hash(String x){        
         // CONSIDERING: using long to avoid overflow
         final int a = 33;   // follow the textbook's suggestion
-        int h = 0;
+        long h = 0;
 
         // Polynomial rolling hash function (Horner's rule)
         for(int i = 0; i < x.length(); i++){
-            h = h * a + x.charAt(i);  // CONSIDERING: if % large prime, avoid overflow
+            h = h * a + x.charAt(i);  
         }
 
         // Ensure non-negative index within bucket array bounds
         return Math.floorMod(h, buckets.length);
     }
 
-    public void insert(String x){
-        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
-        
+    public void insert(String x){        
         // Insert only if x is not already present
         int idx = hash(x);
         if(buckets[idx].addIfAbsent(x)){

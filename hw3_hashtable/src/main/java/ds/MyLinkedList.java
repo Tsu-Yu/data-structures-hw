@@ -10,7 +10,6 @@ public class MyLinkedList {
     }
 
     public boolean contains(String x){
-        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
         Node cur = head;
         while(cur != null){
             if(x.equals(cur.value)) return true;
@@ -20,7 +19,6 @@ public class MyLinkedList {
     }
 
     public boolean addIfAbsent(String x){
-        // if(x == null || x.isEmpty()) throw new IllegalArgumentException("Input cannot be null");
         // If already present, do not add
         if(contains(x)) return false;
 
