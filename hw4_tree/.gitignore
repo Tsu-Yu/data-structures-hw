@@ -1,0 +1,6 @@
+target/
+*.class
+*.iml
+.idea/
+src/test/resources/inorder.txt
+src/test/resources/levelorder.txt
