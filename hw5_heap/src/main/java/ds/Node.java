@@ -1,14 +1,13 @@
 package ds;
 
 public class Node {
-    int data;
+    int value;
     Node left;
     Node right;
+
+    public Node(){}
     
-    Node(int data) {
-        this.data = data;
-        this.left = null;
-        this.right = null;
-    }
-    
+    Node(int value) {
+        this.value = value;
+    } 
 }
